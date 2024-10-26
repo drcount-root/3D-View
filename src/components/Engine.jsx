@@ -16,10 +16,14 @@ export function Engine(props) {
   });
 
   const handlePointerOver = (e) => {
+    // e.stopPropagation();
+    // setHoveredPart(e.object);
+    // document.body.style.cursor = "pointer";
+    // e.object.material.emissive = new THREE.Color(0xbc00ff);
     e.stopPropagation();
-    setHoveredPart(e.object);
-    document.body.style.cursor = "pointer";
+    const partName = e.object.name || "Unnamed Part";
     e.object.material.emissive = new THREE.Color(0xbc00ff);
+    console.log(`Clicked part: ${partName}`);
   };
 
   const handlePointerOut = (e) => {
@@ -28,12 +32,12 @@ export function Engine(props) {
     e.object.material.emissive = new THREE.Color(0x000000);
   };
 
-  const handleClick = (e) => {
-    e.stopPropagation();
-    const partName = e.object.name || "Unnamed Part";
-    e.object.material.emissive = new THREE.Color(0xbc00ff);
-    console.log(`Clicked part: ${partName}`);
-  };
+//   const handleClick = (e) => {
+//     e.stopPropagation();
+//     const partName = e.object.name || "Unnamed Part";
+//     e.object.material.emissive = new THREE.Color(0xbc00ff);
+//     console.log(`Clicked part: ${partName}`);
+//   };
 
   const parts = {
     gear: [
@@ -126,7 +130,7 @@ export function Engine(props) {
               }
               onPointerOver={handlePointerOver}
               onPointerOut={handlePointerOut}
-              onClick={handleClick}
+            //   onClick={handleClick}
               castShadow
               receiveShadow
               name={name}
