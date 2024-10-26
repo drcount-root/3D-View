@@ -1,4 +1,4 @@
-import { useRef, useState, useEffect } from "react";
+import { useRef, useState } from "react";
 import { useGLTF, Html } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
 import * as THREE from "three";
@@ -8,10 +8,9 @@ export function Engine(props) {
   const { nodes } = useGLTF("/models/machine.glb");
   const [hoveredPart, setHoveredPart] = useState(null);
 
-  // Rotation
   useFrame(() => {
     if (group.current && !hoveredPart) {
-      group.current.rotation.z += 0.005;
+      group.current.rotation.z += 0.007;
     }
   });
 
@@ -127,23 +126,25 @@ export function Engine(props) {
           ))}
         </group>
       ))}
-      {/* Render the hovered part on the side */}
+
       {hoveredPart && (
-        <group position={[100, 0, 0]}>
+        <group position={[80, 0, -25]}>
+          <Html position={[10, 0, -20]} center>
+            <p className="text-white text-base bg-[#00000057] p-2 rounded-md w-full">
+              {hoveredPart.name}
+            </p>
+            <div className="bg-white rounded-md"></div>
+          </Html>
+
           <mesh
             geometry={hoveredPart.node}
             material={
               new THREE.MeshStandardMaterial({
-                color: 0x0000FF, // or whatever color you want for the side view
-                emissive: new THREE.Color(0x0000FF), // Highlight color
+                color: 0x0000ff,
+                emissive: new THREE.Color(0x0000ff),
               })
             }
           />
-          <Html position={[0, 0.5, 0]} center>
-            <div style={{ fontSize: "24px", color: "blue", backgroundColor: "0xfff" }}>
-              {hoveredPart.name}
-            </div>
-          </Html>
         </group>
       )}
     </group>

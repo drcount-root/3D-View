@@ -34,7 +34,7 @@ export default function App() {
         <ambientLight intensity={0.3} />
         <pointLight position={[-10, -10, -10]} intensity={0.1} />
 
-        <Bounds fit clip margin={1.2}>
+        <Bounds fit clip margin={3}>
           <Engine rotation={[Math.PI / 2, 0, 0]} />
         </Bounds>
 
