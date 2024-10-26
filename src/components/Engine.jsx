@@ -1,5 +1,5 @@
-import { useRef, useState } from "react";
-import { useGLTF } from "@react-three/drei";
+import { useRef, useState, useEffect } from "react";
+import { useGLTF, Html } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
 import * as THREE from "three";
 
@@ -11,33 +11,23 @@ export function Engine(props) {
   // Rotation
   useFrame(() => {
     if (group.current && !hoveredPart) {
-      group.current.rotation.z += 0.001;
+      group.current.rotation.z += 0.005;
     }
   });
 
   const handlePointerOver = (e) => {
-    // e.stopPropagation();
-    // setHoveredPart(e.object);
-    // document.body.style.cursor = "pointer";
-    // e.object.material.emissive = new THREE.Color(0xbc00ff);
     e.stopPropagation();
     const partName = e.object.name || "Unnamed Part";
     e.object.material.emissive = new THREE.Color(0xbc00ff);
-    console.log(`Clicked part: ${partName}`);
+    setHoveredPart({ node: e.object.geometry, name: partName });
+    console.log(`Hovered part: ${partName}`);
   };
 
   const handlePointerOut = (e) => {
-    setHoveredPart(null);
-    document.body.style.cursor = "auto";
+    e.stopPropagation();
     e.object.material.emissive = new THREE.Color(0x000000);
+    setHoveredPart(null);
   };
-
-//   const handleClick = (e) => {
-//     e.stopPropagation();
-//     const partName = e.object.name || "Unnamed Part";
-//     e.object.material.emissive = new THREE.Color(0xbc00ff);
-//     console.log(`Clicked part: ${partName}`);
-//   };
 
   const parts = {
     gear: [
@@ -130,7 +120,6 @@ export function Engine(props) {
               }
               onPointerOver={handlePointerOver}
               onPointerOut={handlePointerOut}
-            //   onClick={handleClick}
               castShadow
               receiveShadow
               name={name}
@@ -138,9 +127,27 @@ export function Engine(props) {
           ))}
         </group>
       ))}
+      {/* Render the hovered part on the side */}
+      {hoveredPart && (
+        <group position={[100, 0, 0]}>
+          <mesh
+            geometry={hoveredPart.node}
+            material={
+              new THREE.MeshStandardMaterial({
+                color: 0x0000FF, // or whatever color you want for the side view
+                emissive: new THREE.Color(0x0000FF), // Highlight color
+              })
+            }
+          />
+          <Html position={[0, 0.5, 0]} center>
+            <div style={{ fontSize: "24px", color: "blue", backgroundColor: "0xfff" }}>
+              {hoveredPart.name}
+            </div>
+          </Html>
+        </group>
+      )}
     </group>
   );
 }
-
 
 useGLTF.preload("/models/machine.glb");
