@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import { useGLTF, Html, Line } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
 import * as THREE from "three";
@@ -14,6 +14,17 @@ export function Engine(props) {
       group.current.rotation.z += 0.007;
     }
   });
+
+  useEffect(() => {
+    const handleEscape = (event) => {
+      if (event.key === "Escape") {
+        setClickedPart(null);
+      }
+    };
+    window.addEventListener("keydown", handleEscape);
+
+    return () => window.removeEventListener("keydown", handleEscape);
+  }, []);
 
   const handlePointerOver = (e) => {
     e.stopPropagation();
@@ -186,11 +197,6 @@ export function Engine(props) {
             }
             position={[50, 50, -50]}
           />
-          <Html position={[50, 50, -50]} center>
-            <div className="text-white text-base bg-[#00000057] p-2 rounded-md">
-              {clickedPart.name}
-            </div>
-          </Html>
         </group>
       )}
 
@@ -219,7 +225,7 @@ export function Engine(props) {
               />
             ))}
 
-            <Line points={[center, labelPos]} color="white" lineWidth={1} />
+            <Line points={[center, labelPos]} color="gray" lineWidth={1} />
             <Html position={labelPos} center>
               <div className="text-white text-base bg-[#00000057] p-2 rounded-md whitespace-nowrap">
                 {name}
