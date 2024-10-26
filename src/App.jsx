@@ -20,10 +20,8 @@ export default function App() {
       }}
     >
       <Suspense fallback={null}>
-        {/* Hemisphere Light for natural ambient light */}
-        <hemisphereLight color="white" groundColor="gray" intensity={2} />
+        <hemisphereLight color="white" groundColor="gray" intensity={1} />
 
-        {/* Spotlight for directional lighting and shadows */}
         <spotLight
           position={[10, 15, 10]}
           angle={0.3}
@@ -33,16 +31,13 @@ export default function App() {
           shadow-mapSize={[2048, 2048]}
         />
 
-        {/* Additional lighting for balance */}
         <ambientLight intensity={0.3} />
         <pointLight position={[-10, -10, -10]} intensity={0.1} />
 
-        {/* Engine model with bounds */}
         <Bounds fit clip margin={1.2}>
           <Engine rotation={[Math.PI / 2, 0, 0]} />
         </Bounds>
 
-        {/* Ground shadows */}
         <ContactShadows
           position={[0, -0.8, 0]}
           scale={10}
@@ -52,11 +47,9 @@ export default function App() {
           frames={1}
         />
 
-        {/* Environment for better reflections */}
         <Environment preset="studio" />
       </Suspense>
 
-      {/* Controls */}
       <OrbitControls
         enableZoom={true}
         enablePan={true}

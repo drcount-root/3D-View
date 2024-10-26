@@ -8,19 +8,18 @@ export function Engine(props) {
   const { nodes } = useGLTF("/models/machine.glb");
   const [hoveredPart, setHoveredPart] = useState(null);
 
-  // Rotation animation
+  // Rotation
   useFrame(() => {
     if (group.current && !hoveredPart) {
       group.current.rotation.z += 0.001;
     }
   });
 
-  // Handle hover state
   const handlePointerOver = (e) => {
     e.stopPropagation();
     setHoveredPart(e.object);
     document.body.style.cursor = "pointer";
-    e.object.material.emissive = new THREE.Color(0xffffff);
+    e.object.material.emissive = new THREE.Color(0xbc00ff);
   };
 
   const handlePointerOut = (e) => {
@@ -32,11 +31,10 @@ export function Engine(props) {
   const handleClick = (e) => {
     e.stopPropagation();
     const partName = e.object.name || "Unnamed Part";
-    e.object.material.emissive = new THREE.Color(0x5d3fd3);
+    e.object.material.emissive = new THREE.Color(0xbc00ff);
     console.log(`Clicked part: ${partName}`);
   };
 
-  // Parts configuration with explicit names
   const parts = {
     gear: [
       { node: nodes.mesh_0, name: "Gear 1" },
@@ -131,7 +129,7 @@ export function Engine(props) {
               onClick={handleClick}
               castShadow
               receiveShadow
-              name={name} // Assign the name to the mesh
+              name={name}
             />
           ))}
         </group>
@@ -140,5 +138,5 @@ export function Engine(props) {
   );
 }
 
-// Pre-load the model
+
 useGLTF.preload("/models/machine.glb");
