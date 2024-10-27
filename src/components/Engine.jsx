@@ -30,12 +30,14 @@ export function Engine(props) {
     e.stopPropagation();
     const partName = e.object.userData.groupName || "Unnamed Part";
     e.object.material.emissive = new THREE.Color(0xbc00ff);
+    document.body.style.cursor = "pointer";
     setHoveredPart({ node: e.object.geometry, name: partName });
   };
 
   const handlePointerOut = (e) => {
     e.stopPropagation();
     e.object.material.emissive = new THREE.Color(0x000000);
+    document.body.style.cursor = "auto";
     setHoveredPart(null);
   };
 

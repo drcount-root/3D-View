@@ -38,17 +38,17 @@ export default function App() {
               far: 1000,
             }}
           >
-            <hemisphereLight color="white" groundColor="gray" intensity={1} />
-            <spotLight
+            {/* <hemisphereLight color="white" groundColor="gray" intensity={1} /> */}
+            {/* <spotLight
               position={[10, 15, 10]}
               angle={0.3}
               penumbra={0.5}
               intensity={1.5}
               castShadow
               shadow-mapSize={[2048, 2048]}
-            />
-            <ambientLight intensity={0.3} />
-            <pointLight position={[-10, -10, -10]} intensity={0.1} />
+            /> */}
+            {/* <ambientLight intensity={0.3} /> */}
+            {/* <pointLight position={[-10, -10, -10]} intensity={0.1} /> */}
 
             <Bounds fit clip margin={1}>
               <Engine rotation={[Math.PI / 2, 0, 0]} />
