@@ -195,7 +195,7 @@ export function Engine(props) {
                 emissive: new THREE.Color(0xff0000),
               })
             }
-            position={[50, 50, -50]}
+            position={[100, 100, -50]}
           />
         </group>
       )}
