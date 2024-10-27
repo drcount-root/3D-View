@@ -25,12 +25,7 @@ export default function App() {
 
   return (
     <div
-      style={{
-        position: "relative",
-        width: "100vw",
-        height: "100vh",
-        overflow: "hidden",
-      }}
+      className="relative w-screen h-screen overflow-hidden"
     >
       <Canvas
         shadows
@@ -81,25 +76,12 @@ export default function App() {
       </Canvas>
 
       <div
-        style={{
-          position: "absolute",
-          top: "0px",
-          left: "0px",
-          zIndex: 1000,
-        }}
+        className="absolute top-0 left-0 z-10"
         ref={featuresRef}
       >
         <button
           onClick={() => setShowInstructions(!showInstructions)}
-          style={{
-            color: "white",
-            backgroundColor: "rgba(0, 0, 0, 0.5)",
-            padding: "8px 12px",
-            borderRadius: "4px",
-            border: "none",
-            cursor: "pointer",
-            fontSize: "16px",
-          }}
+          className="text-white bg-slate-900 py-2 px-3 rounded-md cursor-pointer flex flex-col gap-1"
         >
           Instructions ▼
         </button>

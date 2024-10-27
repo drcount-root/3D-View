@@ -225,7 +225,7 @@ export function Engine(props) {
               />
             ))}
 
-            <Line points={[center, labelPos]} color="gray" lineWidth={1} />
+            <Line points={[center, labelPos]} color="yellowgreen" lineWidth={1} />
             <Html position={labelPos} center>
               <div className="text-white text-base bg-[#00000057] p-2 rounded-md whitespace-nowrap">
                 {name}
