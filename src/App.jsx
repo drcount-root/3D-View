@@ -38,18 +38,7 @@ export default function App() {
               far: 1000,
             }}
           >
-            {/* <hemisphereLight color="white" groundColor="gray" intensity={1} /> */}
-            {/* <spotLight
-              position={[10, 15, 10]}
-              angle={0.3}
-              penumbra={0.5}
-              intensity={1.5}
-              castShadow
-              shadow-mapSize={[2048, 2048]}
-            /> */}
-            {/* <ambientLight intensity={0.3} /> */}
-            {/* <pointLight position={[-10, -10, -10]} intensity={0.1} /> */}
-
+            <ambientLight intensity={Math.PI / 2} />
             <Bounds fit clip margin={1}>
               <Engine rotation={[Math.PI / 2, 0, 0]} />
             </Bounds>
@@ -65,12 +54,7 @@ export default function App() {
 
             <Environment preset="studio" />
 
-            <OrbitControls
-              enableZoom={true}
-              enablePan={true}
-              minPolarAngle={Math.PI / 4}
-              maxPolarAngle={Math.PI / 1.5}
-            />
+            <OrbitControls />
           </Canvas>
 
           <div className="absolute top-0 left-0 z-10" ref={featuresRef}>
